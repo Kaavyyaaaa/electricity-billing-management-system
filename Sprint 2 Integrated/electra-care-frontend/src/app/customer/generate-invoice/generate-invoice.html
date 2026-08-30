@@ -1,0 +1,36 @@
+<div class="pay-bill-container">
+  <div class="pay-bill-card">
+    <h1>Generate Invoice</h1>
+    <p class="subtitle">Enter the successful payment Transaction ID.</p>
+    <div class="form-group">
+      <label>Transaction ID</label>
+      <input type="text" [(ngModel)]="transactionId" name="transactionId" placeholder="Example: TXN-XXXXXXXX">
+    </div>
+    <div class="button-row">
+      <button class="pay-button" type="button" (click)="generateInvoice()" [disabled]="loading">Generate Invoice</button>
+      <button class="clear-button" type="button" (click)="clear()">Clear</button>
+    </div>
+    @if (errorMessage) { <div class="payment-message error">{{ errorMessage }}</div> }
+    @if (invoice) {
+      <div class="receipt">
+        <h2>Invoice {{ invoice['invoiceNumber'] }}</h2>
+        <div class="receipt-row"><span>Invoice Number</span><strong>{{ invoice['invoiceNumber'] }}</strong></div>
+        <div class="receipt-row"><span>Payment ID</span><strong>{{ invoice['paymentId'] }}</strong></div>
+        <div class="receipt-row"><span>Transaction ID</span><strong>{{ invoice['transactionId'] }}</strong></div>
+        <div class="receipt-row"><span>Receipt Number</span><strong>{{ invoice['receiptNumber'] }}</strong></div>
+        <div class="receipt-row"><span>Consumer Number</span><strong>{{ invoice['consumerNumber'] }}</strong></div>
+        <div class="receipt-row"><span>Customer</span><strong>{{ invoice['customerName'] }}</strong></div>
+        <div class="receipt-row"><span>Address</span><strong>{{ invoice['customerAddress'] }}</strong></div>
+        <div class="receipt-row"><span>Transaction Date</span><strong>{{ invoice['transactionDate'] }}</strong></div>
+        <div class="receipt-row"><span>Transaction Type</span><strong>{{ invoice['transactionType'] }}</strong></div>
+        <div class="receipt-row"><span>Bill Number</span><strong>{{ invoice['billNumber'] }}</strong></div>
+        <div class="receipt-row"><span>Transaction Amount</span><strong>₹{{ invoice['transactionAmount'] }}</strong></div>
+        <div class="receipt-row"><span>Status</span><strong>{{ invoice['paymentStatus'] }}</strong></div>
+      </div>
+      <div class="button-row">
+        <button class="pay-button" type="button" (click)="downloadInvoice()">Download Invoice</button>
+        <a class="clear-button" routerLink="/bill-history">Back to Bill History</a>
+      </div>
+    }
+  </div>
+</div>

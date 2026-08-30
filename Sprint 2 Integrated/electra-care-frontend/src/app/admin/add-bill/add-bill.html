@@ -1,0 +1,325 @@
+<div class="add-bill-container">
+
+    <div class="add-bill-card">
+  
+      <!-- HEADER -->
+  
+      <div class="page-header">
+  
+        <div>
+          <h1>Add Electricity Bill</h1>
+  
+          <p>
+            Create and save a new electricity bill for a customer.
+          </p>
+        </div>
+  
+        <div class="admin-badge">
+          Admin
+        </div>
+  
+      </div>
+  
+  
+      <!-- ERROR MESSAGE -->
+  
+      @if (errorMessage) {
+  
+        <div class="error-message">
+          <strong>Error:</strong>
+          {{ errorMessage }}
+        </div>
+  
+      }
+  
+  
+      <!-- SUCCESS MESSAGE -->
+  
+      @if (successMessage) {
+  
+        <div class="success-message">
+  
+          <div class="success-icon">
+            ✓
+          </div>
+  
+          <div>
+  
+            <strong>
+              {{ successMessage }}
+            </strong>
+  
+            <p>
+              Bill ID:
+              <b>{{ generatedBillId }}</b>
+            </p>
+  
+          </div>
+  
+        </div>
+  
+      }
+  
+  
+      <!-- BILL FORM -->
+  
+      <div class="form-section">
+  
+        <h2>Bill Details</h2>
+  
+        <div class="form-grid">
+  
+  
+          <!-- CONSUMER NUMBER -->
+  
+          <div class="form-group">
+  
+            <label for="consumerNo">
+              Consumer Number
+              <span>*</span>
+            </label>
+  
+            <input
+              type="text"
+              id="consumerNo"
+              name="consumerNo"
+              [(ngModel)]="consumerNo"
+              placeholder="Example: CON10001"
+            />
+  
+            <small>
+              Enter the customer's consumer number.
+            </small>
+  
+          </div>
+  
+  
+          <!-- BILLING PERIOD -->
+  
+          <div class="form-group">
+  
+            <label for="billingPeriod">
+              Billing Period
+              <span>*</span>
+            </label>
+  
+            <select
+              id="billingPeriod"
+              name="billingPeriod"
+              [(ngModel)]="billingPeriod">
+  
+              <option value="">
+                Select Billing Period
+              </option>
+  
+              <option value="August 2026">
+                August 2026
+              </option>
+  
+              <option value="September 2026">
+                September 2026
+              </option>
+  
+              <option value="October 2026">
+                October 2026
+              </option>
+  
+              <option value="November 2026">
+                November 2026
+              </option>
+  
+              <option value="December 2026">
+                December 2026
+              </option>
+  
+            </select>
+  
+          </div>
+  
+  
+          <!-- BILL DATE -->
+  
+          <div class="form-group">
+  
+            <label for="billDate">
+              Bill Date
+              <span>*</span>
+            </label>
+  
+            <input
+              type="date"
+              id="billDate"
+              name="billDate"
+              [(ngModel)]="billDate"
+            />
+  
+          </div>
+  
+  
+          <!-- DUE DATE -->
+  
+          <div class="form-group">
+  
+            <label for="dueDate">
+              Due Date
+              <span>*</span>
+            </label>
+  
+            <input
+              type="date"
+              id="dueDate"
+              name="dueDate"
+              [(ngModel)]="dueDate"
+            />
+  
+          </div>
+  
+  
+          <!-- DISCONNECTION DATE -->
+  
+          <div class="form-group">
+  
+            <label for="disconnectionDate">
+              Disconnection Date
+              <span>*</span>
+            </label>
+  
+            <input
+              type="date"
+              id="disconnectionDate"
+              name="disconnectionDate"
+              [(ngModel)]="disconnectionDate"
+            />
+  
+          </div>
+  
+  
+          <!-- BILL AMOUNT -->
+  
+          <div class="form-group">
+  
+            <label for="billAmount">
+              Bill Amount
+              <span>*</span>
+            </label>
+  
+            <div class="amount-input">
+  
+              <span>₹</span>
+  
+              <input
+                type="number"
+                id="billAmount"
+                name="billAmount"
+                [(ngModel)]="billAmount"
+                min="1"
+                placeholder="Enter amount"
+              />
+  
+            </div>
+  
+          </div>
+  
+  
+          <!-- LATE FEE -->
+  
+          <div class="form-group">
+  
+            <label for="lateFee">
+              Late Fee
+            </label>
+  
+            <div class="amount-input">
+  
+              <span>₹</span>
+  
+              <input
+                type="number"
+                id="lateFee"
+                name="lateFee"
+                [(ngModel)]="lateFee"
+                min="0"
+                placeholder="0"
+              />
+  
+            </div>
+  
+            <small>
+              Optional. Default value is ₹0.
+            </small>
+  
+          </div>
+  
+  
+          <!-- STATUS -->
+  
+          <div class="form-group">
+  
+            <label for="status">
+              Payment Status
+              <span>*</span>
+            </label>
+  
+            <select
+              id="status"
+              name="status"
+              [(ngModel)]="status">
+  
+              <option value="Unpaid">
+                Unpaid
+              </option>
+  
+              <option value="Paid">
+                Paid
+              </option>
+  
+            </select>
+  
+          </div>
+  
+        </div>
+  
+      </div>
+  
+  
+      <!-- BUTTONS -->
+  
+      <div class="form-actions">
+  
+        <button
+          type="button"
+          class="clear-button"
+          (click)="clearForm()">
+  
+          Clear
+  
+        </button>
+  
+        <button
+          type="button"
+          class="save-button"
+          (click)="saveBill()">
+  
+          Save Bill
+  
+        </button>
+  
+      </div>
+  
+  
+      <!-- INFORMATION -->
+  
+      <div class="info-box">
+  
+        <strong>Note:</strong>
+  
+        <span>
+          All fields marked with * are required.
+          Bill Date must be before the Due Date.
+        </span>
+  
+      </div>
+  
+    </div>
+  
+  </div>

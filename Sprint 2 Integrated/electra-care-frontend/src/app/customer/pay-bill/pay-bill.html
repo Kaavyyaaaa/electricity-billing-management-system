@@ -1,0 +1,114 @@
+<div class="pay-bill-container">
+  @if (payment) {
+    <div class="success-card">
+      <div class="success-icon">✓</div>
+      <h1>Payment Successful!</h1>
+      <p class="success-text">{{ successMessage }}</p>
+      <div class="receipt">
+        <div class="receipt-row"><span>Payment ID</span><strong>{{ payment.paymentId }}</strong></div>
+        <div class="receipt-row"><span>Transaction ID</span><strong>{{ payment.transactionId }}</strong></div>
+        <div class="receipt-row"><span>Receipt Number</span><strong>{{ payment.receiptNumber }}</strong></div>
+        <div class="receipt-row"><span>Transaction Date</span><strong>{{ payment.paymentDate }}</strong></div>
+        <div class="receipt-row"><span>Transaction Type</span><strong>{{ payment.transactionType }}</strong></div>
+        <div class="receipt-row"><span>Bill Number</span><strong>{{ selectedBill?.billNumber }}</strong></div>
+        <div class="receipt-row"><span>Transaction Amount</span><strong>₹{{ payment.totalAmount }}</strong></div>
+        <div class="receipt-row"><span>Transaction Status</span><strong class="paid">{{ payment.paymentStatus }}</strong></div>
+      </div>
+      <div class="button-row">
+        <button type="button" class="pay-button" (click)="downloadReceipt()">Download Receipt</button>
+        <a class="clear-button" [routerLink]="['/generate-invoice']" [queryParams]="{transactionId: payment.transactionId}">Generate Invoice</a>
+        <button type="button" class="clear-button" (click)="reset()">Make Another Payment</button>
+      </div>
+    </div>
+  } @else {
+    <div class="pay-bill-card">
+      <h1>Pay Electricity Bill</h1>
+      <p class="subtitle">Find your unpaid bill, review the amount, and complete payment.</p>
+
+      @if (errorMessage) { <div class="payment-message error">{{ errorMessage }}</div> }
+
+      <div class="bill-summary">
+        <h2>Find Bill</h2>
+        <div class="form-group">
+          <label>Consumer Number</label>
+          <div class="button-row">
+            <input type="text" [(ngModel)]="consumerNumber" name="consumerNumber" placeholder="Enter consumer number">
+            <button type="button" class="pay-button" (click)="loadBills()" [disabled]="loading">Find Bills</button>
+          </div>
+        </div>
+
+        @if (bills.length > 0) {
+          <div class="form-group">
+            <label>Select Unpaid Bill</label>
+            <select [(ngModel)]="selectedBillId" name="selectedBillId" (change)="selectBill()">
+              <option [ngValue]="null">Select a bill</option>
+              @for (bill of bills; track bill.billId) {
+                <option [ngValue]="bill.billId">{{ bill.billNumber }} — {{ bill.billingPeriod }} — ₹{{ bill.billAmount }}</option>
+              }
+            </select>
+          </div>
+        }
+
+        @if (selectedBill) {
+          <div class="bill-row"><span>Bill Number</span><strong>{{ selectedBill.billNumber }}</strong></div>
+          <div class="bill-row"><span>Due Date</span><strong>{{ selectedBill.dueDate }}</strong></div>
+          <div class="bill-row amount-row"><span>Total Amount Due</span><strong>₹{{ selectedBill.billAmount }}</strong></div>
+        }
+      </div>
+
+      @if (selectedBill) {
+        <div class="payment-section">
+          <h2>Card Details</h2>
+          <form (ngSubmit)="submitPayment()">
+            <div class="form-group">
+              <label>Cardholder Name</label>
+              <input type="text" name="cardholderName" [(ngModel)]="cardholderName" placeholder="Enter cardholder name">
+              @if (cardholderNameError) { <div class="field-error">{{ cardholderNameError }}</div> }
+            </div>
+            <div class="form-group">
+              <label>Card Number</label>
+              <input type="text" name="cardNumber" [(ngModel)]="cardNumber" maxlength="16" inputmode="numeric" placeholder="16-digit card number" (input)="cardNumber = cardNumber.replace(/[^0-9]/g, '')">
+              @if (cardNumberError) { <div class="field-error">{{ cardNumberError }}</div> }
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label>Expiry Date</label>
+                <input type="text" name="expiryDate" [(ngModel)]="expiryDate" maxlength="5" placeholder="MM/YY">
+                @if (expiryDateError) { <div class="field-error">{{ expiryDateError }}</div> }
+              </div>
+              <div class="form-group">
+                <label>CVV</label>
+                <input type="password" name="cvv" [(ngModel)]="cvv" maxlength="4" placeholder="3 or 4 digits">
+                @if (cvvError) { <div class="field-error">{{ cvvError }}</div> }
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Payment Method</label>
+              <select name="paymentMethod" [(ngModel)]="paymentMethod"><option>Card</option></select>
+            </div>
+            <div class="button-row">
+              <button type="submit" class="pay-button">Review Payment ₹{{ selectedBill.billAmount }}</button>
+              <button type="button" class="clear-button" (click)="reset()">Clear</button>
+            </div>
+          </form>
+        </div>
+      }
+    </div>
+  }
+
+  @if (showConfirmation && selectedBill) {
+    <div class="details-overlay">
+      <div class="details-modal">
+        <h2>Confirm Payment</h2>
+        <p>Please review the payment before final submission.</p>
+        <p><strong>Bill:</strong> {{ selectedBill.billNumber }}</p>
+        <p><strong>Amount:</strong> ₹{{ selectedBill.billAmount }}</p>
+        <p><strong>Card:</strong> **** **** **** {{ cardNumber.slice(-4) }}</p>
+        <div class="button-row">
+          <button type="button" class="clear-button" (click)="cancelConfirmation()">Cancel</button>
+          <button type="button" class="pay-button" (click)="confirmPayment()">Confirm Payment</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

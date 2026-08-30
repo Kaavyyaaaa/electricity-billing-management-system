@@ -1,0 +1,289 @@
+.add-bill-container {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: #f1f4f8;
+    box-sizing: border-box;
+  }
+  
+  .add-bill-card {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+  
+  
+  /* HEADER */
+  
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 35px;
+    border-bottom: 1px solid #e5e9ee;
+  }
+  
+  .page-header h1 {
+    margin: 0 0 7px;
+    color: #172033;
+    font-size: 28px;
+  }
+  
+  .page-header p {
+    margin: 0;
+    color: #707887;
+    font-size: 14px;
+  }
+  
+  .admin-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: #eaf3ff;
+    color: #1976d2;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  
+  
+  /* ERROR */
+  
+  .error-message {
+    margin: 25px 35px 0;
+    padding: 14px 16px;
+    background: #fff0f0;
+    border: 1px solid #ffd1d1;
+    border-radius: 8px;
+    color: #d32f2f;
+    font-size: 14px;
+  }
+  
+  
+  /* SUCCESS */
+  
+  .success-message {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 25px 35px 0;
+    padding: 16px;
+    background: #edf8ef;
+    border: 1px solid #c8e6c9;
+    border-radius: 9px;
+    color: #2e7d32;
+  }
+  
+  .success-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #2e7d32;
+    color: #ffffff;
+    font-weight: 700;
+  }
+  
+  .success-message p {
+    margin: 5px 0 0;
+    font-size: 13px;
+  }
+  
+  
+  /* FORM */
+  
+  .form-section {
+    padding: 30px 35px;
+  }
+  
+  .form-section h2 {
+    margin: 0 0 22px;
+    color: #273142;
+    font-size: 19px;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  
+  
+  /* FORM GROUP */
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #3f4855;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+  .form-group label span {
+    color: #d32f2f;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #ccd3dc;
+    border-radius: 7px;
+    color: #333;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+  }
+  
+  .form-group small {
+    display: block;
+    margin-top: 6px;
+    color: #858d98;
+    font-size: 11px;
+  }
+  
+  
+  /* AMOUNT */
+  
+  .amount-input {
+    display: flex;
+    align-items: center;
+  }
+  
+  .amount-input span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    width: 40px;
+    background: #f5f7fa;
+    border: 1px solid #ccd3dc;
+    border-right: none;
+    border-radius: 7px 0 0 7px;
+    color: #555;
+    font-weight: 600;
+  }
+  
+  .amount-input input {
+    border-radius: 0 7px 7px 0;
+  }
+  
+  
+  /* BUTTONS */
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 20px 35px;
+    background: #fafbfc;
+    border-top: 1px solid #e5e9ee;
+  }
+  
+  .clear-button,
+  .save-button {
+    min-width: 130px;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .clear-button {
+    background: #ffffff;
+    border: 1px solid #ccd3dc;
+    color: #424a56;
+  }
+  
+  .clear-button:hover {
+    background: #eef1f4;
+  }
+  
+  .save-button {
+    background: #1976d2;
+    border: 1px solid #1976d2;
+    color: #ffffff;
+  }
+  
+  .save-button:hover {
+    background: #125ca3;
+    transform: translateY(-1px);
+  }
+  
+  
+  /* NOTE */
+  
+  .info-box {
+    display: flex;
+    gap: 6px;
+    margin: 0 35px 30px;
+    padding: 13px 15px;
+    background: #f5f8fc;
+    border-radius: 8px;
+    color: #667080;
+    font-size: 12px;
+  }
+  
+  .info-box strong {
+    color: #3f4855;
+  }
+  
+  
+  /* MOBILE */
+  
+  @media (max-width: 650px) {
+  
+    .add-bill-container {
+      padding: 20px 10px;
+    }
+  
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 25px 20px;
+    }
+  
+    .admin-badge {
+      align-self: flex-start;
+    }
+  
+    .form-section {
+      padding: 25px 20px;
+    }
+  
+    .form-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  
+    .error-message,
+    .success-message {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  
+    .form-actions {
+      padding: 20px;
+    }
+  
+    .info-box {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  
+  }

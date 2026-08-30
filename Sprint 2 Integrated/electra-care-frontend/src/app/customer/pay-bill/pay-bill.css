@@ -1,0 +1,240 @@
+.pay-bill-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background: #f5f7fa;
+    box-sizing: border-box;
+  }
+  
+  .pay-bill-card {
+    width: 100%;
+    max-width: 550px;
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    text-align: center;
+    margin: 0 0 8px;
+    font-size: 28px;
+    color: #222;
+  }
+  
+  .subtitle {
+    text-align: center;
+    color: #666;
+    margin: 0 0 25px;
+    font-size: 15px;
+  }
+  
+  
+  /* BILL SUMMARY */
+  
+  .bill-summary {
+    background: #f8f9fb;
+    border: 1px solid #e1e4e8;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 28px;
+  }
+  
+  .bill-summary h2,
+  .payment-section h2 {
+    margin: 0 0 18px;
+    font-size: 19px;
+    color: #222;
+  }
+  
+  .bill-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 14px;
+  }
+  
+  .bill-row:last-child {
+    border-bottom: none;
+  }
+  
+  .bill-row span {
+    color: #666;
+  }
+  
+  .bill-row strong {
+    color: #222;
+  }
+  
+  .amount-row {
+    margin-top: 5px;
+    padding-top: 15px;
+    font-size: 17px;
+  }
+  
+  .amount-row strong {
+    font-size: 20px;
+  }
+  
+  
+  /* PAYMENT SECTION */
+  
+  .payment-section {
+    margin-top: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    box-sizing: border-box;
+    font-size: 15px;
+    color: #333;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  input::placeholder {
+    color: #999;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #1976d2;
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+  }
+  
+  
+  /* EXPIRY + CVV */
+  
+  .row {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .row .form-group {
+    flex: 1;
+  }
+  
+  
+  /* ERROR MESSAGE */
+  
+  .field-error {
+    margin-top: 6px;
+    color: #d32f2f;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  
+  
+  /* BUTTONS */
+  
+  .button-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  
+  .pay-button,
+  .clear-button {
+    flex: 1;
+    padding: 13px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  
+  .pay-button {
+    border: none;
+    background: #1976d2;
+    color: #ffffff;
+  }
+  
+  .pay-button:hover {
+    background: #125ca3;
+    transform: translateY(-1px);
+  }
+  
+  .clear-button {
+    background: #f1f3f5;
+    color: #333;
+    border: 1px solid #d5d8dc;
+  }
+  
+  .clear-button:hover {
+    background: #e2e6ea;
+    transform: translateY(-1px);
+  }
+  
+  
+  /* PAYMENT MESSAGE */
+  
+  .payment-message {
+    margin-top: 20px;
+    padding: 12px;
+    text-align: center;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  
+  .payment-message.success {
+    color: green;
+    background: #e8f5e9;
+  }
+  
+  .payment-message.error {
+    color: red;
+    background: #ffebee;
+  }
+  
+  
+  /* MOBILE */
+  
+  @media (max-width: 600px) {
+  
+    .pay-bill-container {
+      padding: 20px;
+    }
+  
+    .pay-bill-card {
+      padding: 25px 20px;
+    }
+  
+    h1 {
+      font-size: 24px;
+    }
+  
+    .row {
+      flex-direction: column;
+      gap: 0;
+    }
+  
+    .button-row {
+      flex-direction: column;
+    }
+  
+    .pay-button,
+    .clear-button {
+      width: 100%;
+    }
+  }

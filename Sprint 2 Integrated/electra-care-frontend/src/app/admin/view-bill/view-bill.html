@@ -1,0 +1,461 @@
+<div class="view-bill-container">
+
+    <div class="view-bill-card">
+  
+      <!-- HEADER -->
+  
+      <div class="page-header">
+  
+        <div>
+          <h1>View Bill History</h1>
+          <p>
+            Search and view electricity bills for a customer.
+          </p>
+        </div>
+  
+        <div class="admin-badge">
+          Admin
+        </div>
+  
+      </div>
+  
+  
+      <!-- SEARCH SECTION -->
+  
+      <div class="search-section">
+  
+        <h2>Search Customer</h2>
+  
+        <div class="search-row">
+  
+          <div class="search-input">
+  
+            <label for="consumerNo">
+              Consumer Number
+            </label>
+  
+            <input
+              type="text"
+              id="consumerNo"
+              name="consumerNo"
+              [(ngModel)]="consumerNo"
+              placeholder="Example: CON10001"
+              (keyup.enter)="searchCustomer()"
+            />
+  
+          </div>
+  
+          <button
+            type="button"
+            class="search-button"
+            (click)="searchCustomer()">
+  
+            Search
+  
+          </button>
+  
+          <button
+            type="button"
+            class="clear-button"
+            (click)="clearSearch()">
+  
+            Clear
+  
+          </button>
+  
+        </div>
+  
+      </div>
+  
+  
+      <!-- ERROR -->
+  
+      @if (errorMessage) {
+  
+        <div class="error-message">
+  
+          <strong>Error:</strong>
+          {{ errorMessage }}
+  
+        </div>
+  
+      }
+  
+  
+      <!-- FILTERS -->
+  
+      @if (searched && filteredBills.length > 0) {
+  
+        <div class="filter-section">
+  
+          <div class="filter-group">
+  
+            <label for="paymentStatus">
+              Payment Status
+            </label>
+  
+            <select
+              id="paymentStatus"
+              name="paymentStatus"
+              [(ngModel)]="paymentStatus"
+              (change)="onFilterChange()">
+  
+              <option value="All">
+                All
+              </option>
+  
+              <option value="Paid">
+                Paid
+              </option>
+  
+              <option value="Unpaid">
+                Unpaid
+              </option>
+  
+            </select>
+  
+          </div>
+  
+  
+          <div class="filter-group">
+  
+            <label for="billingPeriod">
+              Billing Period
+            </label>
+  
+            <select
+              id="billingPeriod"
+              name="billingPeriod"
+              [(ngModel)]="billingPeriod"
+              (change)="onFilterChange()">
+  
+              <option value="All">
+                All Periods
+              </option>
+  
+              <option value="August 2026">
+                August 2026
+              </option>
+  
+              <option value="July 2026">
+                July 2026
+              </option>
+  
+              <option value="June 2026">
+                June 2026
+              </option>
+  
+              <option value="May 2026">
+                May 2026
+              </option>
+  
+            </select>
+  
+          </div>
+  
+  
+          <button
+            type="button"
+            class="export-button"
+            (click)="exportCSV()">
+  
+            Export CSV
+  
+          </button>
+  
+        </div>
+  
+      }
+  
+  
+      <!-- BILL HISTORY -->
+  
+      @if (searched && filteredBills.length > 0) {
+  
+        <div class="result-header">
+  
+          <div>
+  
+            <h2>Bill History</h2>
+  
+            <p>
+              Consumer Number:
+              <strong>{{ consumerNo }}</strong>
+            </p>
+  
+          </div>
+  
+          <span>
+            {{ filteredBills.length }} bill(s)
+          </span>
+  
+        </div>
+  
+  
+        <!-- TABLE -->
+  
+        <div class="table-container">
+  
+          <table>
+  
+            <thead>
+  
+              <tr>
+  
+                <th>Bill ID</th>
+  
+                <th>Billing Period</th>
+  
+                <th>Bill Date</th>
+  
+                <th>Due Date</th>
+  
+                <th>Bill Amount</th>
+  
+                <th>Late Fee</th>
+  
+                <th>Status</th>
+  
+                <th>Payment Date</th>
+  
+                <th>Action</th>
+  
+              </tr>
+  
+            </thead>
+  
+  
+            <tbody>
+  
+              @for (bill of filteredBills; track bill.billId) {
+  
+                <tr>
+  
+                  <td>
+                    <strong>
+                      {{ bill.billId }}
+                    </strong>
+                  </td>
+  
+                  <td>
+                    {{ bill.billingPeriod }}
+                  </td>
+  
+                  <td>
+                    {{ bill.billDate }}
+                  </td>
+  
+                  <td>
+                    {{ bill.dueDate }}
+                  </td>
+  
+                  <td>
+                    <strong>
+                      ₹{{ bill.billAmount }}
+                    </strong>
+                  </td>
+  
+                  <td>
+                    ₹{{ bill.lateFee }}
+                  </td>
+  
+                  <td>
+  
+                    @if (bill.paymentStatus === 'Paid') {
+  
+                      <span class="status paid">
+                        Paid
+                      </span>
+  
+                    } @else {
+  
+                      <span class="status unpaid">
+                        Unpaid
+                      </span>
+  
+                    }
+  
+                  </td>
+  
+                  <td>
+                    {{ bill.paymentDate }}
+                  </td>
+  
+                  <td>
+  
+                    <button
+                      type="button"
+                      class="details-button"
+                      (click)="viewDetails(bill)">
+  
+                      View Details
+  
+                    </button>
+  
+                  </td>
+  
+                </tr>
+  
+              }
+  
+            </tbody>
+  
+          </table>
+  
+        </div>
+  
+      }
+  
+  
+      <!-- FILTER NO RESULTS -->
+  
+      @if (searched && !errorMessage && filteredBills.length === 0) {
+  
+        <div class="no-data">
+  
+          <div class="no-data-icon">
+            !
+          </div>
+  
+          <h3>No Bills Found</h3>
+  
+          <p>
+            No bills match the selected filters.
+          </p>
+  
+        </div>
+  
+      }
+  
+  
+      <!-- BILL DETAILS -->
+  
+      @if (selectedBill) {
+  
+        <div class="details-overlay">
+  
+          <div class="details-modal">
+  
+            <div class="modal-header">
+  
+              <div>
+                <h2>Bill Details</h2>
+                <p>
+                  {{ selectedBill.billId }}
+                </p>
+              </div>
+  
+              <button
+                type="button"
+                class="close-button"
+                (click)="closeDetails()">
+  
+                ×
+  
+              </button>
+  
+            </div>
+  
+  
+            <div class="details-grid">
+  
+              <div class="detail-item">
+                <span>Bill ID</span>
+                <strong>
+                  {{ selectedBill.billId }}
+                </strong>
+              </div>
+  
+              <div class="detail-item">
+                <span>Consumer Number</span>
+                <strong>
+                  {{ selectedBill.consumerNo }}
+                </strong>
+              </div>
+  
+              <div class="detail-item">
+                <span>Billing Period</span>
+                <strong>
+                  {{ selectedBill.billingPeriod }}
+                </strong>
+              </div>
+  
+              <div class="detail-item">
+                <span>Bill Date</span>
+                <strong>
+                  {{ selectedBill.billDate }}
+                </strong>
+              </div>
+  
+              <div class="detail-item">
+                <span>Due Date</span>
+                <strong>
+                  {{ selectedBill.dueDate }}
+                </strong>
+              </div>
+  
+              <div class="detail-item">
+                <span>Bill Amount</span>
+                <strong>
+                  ₹{{ selectedBill.billAmount }}
+                </strong>
+              </div>
+  
+              <div class="detail-item">
+                <span>Late Fee</span>
+                <strong>
+                  ₹{{ selectedBill.lateFee }}
+                </strong>
+              </div>
+  
+              <div class="detail-item">
+                <span>Payment Status</span>
+  
+                @if (selectedBill.paymentStatus === 'Paid') {
+  
+                  <span class="status paid">
+                    Paid
+                  </span>
+  
+                } @else {
+  
+                  <span class="status unpaid">
+                    Unpaid
+                  </span>
+  
+                }
+  
+              </div>
+  
+              <div class="detail-item">
+                <span>Payment Date</span>
+                <strong>
+                  {{ selectedBill.paymentDate }}
+                </strong>
+              </div>
+  
+            </div>
+  
+  
+            <div class="modal-footer">
+  
+              <button
+                type="button"
+                class="close-modal-button"
+                (click)="closeDetails()">
+  
+                Close
+  
+              </button>
+  
+            </div>
+  
+          </div>
+  
+        </div>
+  
+      }
+  
+    </div>
+  
+  </div>

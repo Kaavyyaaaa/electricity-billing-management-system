@@ -1,0 +1,19 @@
+<div class="history-container"><div class="history-card">
+<h1>Bill History</h1><p>View your electricity bills and payment history.</p>
+<div class="filter-section">
+<div class="filter-grid">
+<div class="filter-group"><label>Consumer Number</label><input [(ngModel)]="consumerNumber" name="consumerNumber" placeholder="Consumer Number"></div>
+<div class="filter-group"><label>From Date</label><input type="date" [(ngModel)]="fromDate" name="fromDate"></div>
+<div class="filter-group"><label>To Date</label><input type="date" [(ngModel)]="toDate" name="toDate"></div>
+<div class="filter-group"><label>Status</label><select [(ngModel)]="paymentStatus" name="paymentStatus"><option>All</option><option>PAID</option><option>UNPAID</option></select></div>
+<div class="filter-group"><label>Sort By</label><select [(ngModel)]="sortBy" name="sortBy"><option value="billDate">Bill Date</option><option value="dueDate">Due Date</option><option value="billAmount">Bill Amount</option></select></div>
+</div>
+<div class="button-row"><button class="pay-button" (click)="loadHistory()">Load History</button><button class="clear-filter-button" (click)="clearFilters()">Clear Filters</button></div>
+</div>
+@if (noDataMessage) { <div class="no-data"><h3>No Bills Found</h3><p>{{ noDataMessage }}</p></div> }
+@if (bills.length) {
+<h2>{{ bills.length }} bill(s) found</h2>
+<div class="table-container"><table><thead><tr><th>Bill Date</th><th>Billing Period</th><th>Due Date</th><th>Bill Amount</th><th>Payment Status</th><th>Payment Date</th><th>Mode</th><th>Actions</th></tr></thead>
+<tbody>@for (bill of bills; track bill.billId) {<tr><td>{{bill.billDate}}</td><td>{{bill.billingPeriod}}</td><td>{{bill.dueDate}}</td><td>₹{{bill.billAmount}}</td><td>{{bill.status}}</td><td>{{bill.paymentDate || '-'}}</td><td>{{bill.paymentMode || '-'}}</td><td><button (click)="viewBill(bill)">View</button><button (click)="downloadBill(bill)">Download</button></td></tr>}</tbody></table></div>
+}
+</div></div>

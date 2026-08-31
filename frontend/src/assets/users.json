@@ -1,0 +1,35 @@
+[
+  {
+    "consumerNumber": "EC20260001",
+    "customerName": "Priya Shah",
+    "address": "12 Green Park, Mumbai",
+    "email": "priya@example.com",
+    "mobileNumber": "9876543210",
+    "customerType": "Residential",
+    "electricalSection": "South Division",
+    "userId": "priya",
+    "password": "welcome123"
+  },
+  {
+    "consumerNumber": "EC20260002",
+    "customerName": "Rohit Verma",
+    "address": "21 Lake View, Pune",
+    "email": "rohit@example.com",
+    "mobileNumber": "9123456780",
+    "customerType": "Commercial",
+    "electricalSection": "North Division",
+    "userId": "rohit",
+    "password": "power456"
+  },
+  {
+    "consumerNumber": "EC20260003",
+    "customerName": "Admin User",
+    "address": "Head Office, Bengaluru",
+    "email": "admin@electra.com",
+    "mobileNumber": "9988776655",
+    "customerType": "Residential",
+    "electricalSection": "East Division",
+    "userId": "admin",
+    "password": "admin123"
+  }
+]
